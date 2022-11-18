@@ -1,33 +1,39 @@
-import React from 'react'
-import {useAppDispatch, useAppSelector} from "../../utils/hooks";
-import {CounterActionType} from "../../reducers/counter/actions";
-import {ConfigActionType} from "../../reducers/config/actions";
+import React from "react";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { CounterActionType } from "../../reducers/counter/actions";
+import { ConfigActionType } from "../../reducers/config/actions";
 
 export default function App() {
-  const counter = useAppSelector(state => state.counter);
-  const config = useAppSelector(state => state.config);
-  const dispatch = useAppDispatch()
+  const counter = useAppSelector((state) => state.counter);
+  const config = useAppSelector((state) => state.config);
+  const dispatch = useAppDispatch();
 
   return (
     <div>
       <div>
         <button
-          onClick={() => dispatch({
-            type: CounterActionType.Increment,
-            payload: {
-              by: 3
-            }}
-          )}
+          type="button"
+          onClick={() =>
+            dispatch({
+              type: CounterActionType.Increment,
+              payload: {
+                by: 3,
+              },
+            })
+          }
         >
           ab
         </button>
         <button
-          onClick={() => dispatch({
-            type: ConfigActionType.Set,
-            payload: {
-              newValue: 'test'
-            }}
-          )}
+          type="button"
+          onClick={() =>
+            dispatch({
+              type: ConfigActionType.Set,
+              payload: {
+                newValue: "test",
+              },
+            })
+          }
         >
           cd
         </button>
@@ -35,5 +41,5 @@ export default function App() {
         <span>{config.value}</span>
       </div>
     </div>
-  )
+  );
 }

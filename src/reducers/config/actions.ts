@@ -1,5 +1,5 @@
 export enum ConfigActionType {
-  Set = 'CONFIG/SET',
+  Set = "CONFIG/SET",
 }
 
 export type Increment = {

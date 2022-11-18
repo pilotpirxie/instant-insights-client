@@ -1,5 +1,5 @@
 export enum CounterActionType {
-  Increment = 'COUNTER/INCREMENT',
+  Increment = "COUNTER/INCREMENT",
 }
 
 export type Increment = {
