@@ -1,3 +1,5 @@
+import produce from "immer"
+
 import {
   CounterActionType,
   Increment,
@@ -19,10 +21,9 @@ export default function reducer(
 ): CounterState {
   switch (action.type) {
     case CounterActionType.Increment:
-      return {
-        ...state,
-        counter: state.counter + action.payload.by
-      };
+      return produce(state, newState => {
+        newState.counter = state.counter + action.payload.by;
+      });
     default:
       return state;
   }

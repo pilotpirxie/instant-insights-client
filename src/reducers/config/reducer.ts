@@ -2,6 +2,7 @@ import {
   ConfigActionType,
   Increment,
 } from './actions';
+import produce from "immer";
 
 export type ConfigState = {
   value: string;
@@ -19,10 +20,9 @@ export default function reducer(
 ): ConfigState {
   switch (action.type) {
     case ConfigActionType.Set:
-      return {
-        ...state,
-        value: action.payload.newValue
-      };
+      return produce(state, newState => {
+        newState.value = action.payload.newValue;
+      });
     default:
       return state;
   }
