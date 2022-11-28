@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
+import "bootstrap/dist/js/bootstrap.bundle";
+import "bootstrap/dist/css/bootstrap.css";
 import reportWebVitals from "./utils/reportWebVitals";
 import store from "./utils/store";
 import App from "./containers/App/App";
