@@ -1,7 +1,7 @@
 import "./Dashboard.css";
 import Summary from "../../components/Summary/Summary";
 import EventsExplorer from "../../components/EventsExplorer/EventsExplorer";
-import Footer from "../../Footer/Footer";
+import Footer from "../../components/Footer/Footer";
 import Navigation from "../../components/Navigation/Navigation";
 
 export default function Dashboard() {

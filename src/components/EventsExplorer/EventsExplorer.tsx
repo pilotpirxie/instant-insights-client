@@ -1,6 +1,6 @@
 import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { Calendar } from "primereact/calendar";
 import utc from "dayjs/plugin/utc";
@@ -52,10 +52,10 @@ export default function EventsExplorer({
   >("day");
   const isMobile = useMobileSize();
 
-  const handleFetch = () => {
+  const handleFetch = useCallback(() => {
     // eslint-disable-next-line no-console
     console.log("Fetch", dateFrom, dateTo, interval, endpoint);
-  };
+  }, [dateFrom, dateTo, interval, endpoint]);
 
   useEffect(() => {
     setEvents({
