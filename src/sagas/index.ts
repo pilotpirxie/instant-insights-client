@@ -8,4 +8,8 @@ export default function* rootSaga() {
     SessionsActionType.LoginFromLocalStorage,
     sessions.loginFromLocalStorage
   );
+
+  yield takeLatest(SessionsActionType.Login, sessions.login);
+
+  yield takeLatest(SessionsActionType.RefreshTokens, sessions.refreshTokens);
 }

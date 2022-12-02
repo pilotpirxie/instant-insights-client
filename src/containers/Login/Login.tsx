@@ -20,7 +20,13 @@ export default function Login() {
         return;
       }
 
-      navigate("/dashboard");
+      dispatch({
+        type: SessionsActionType.Login,
+        payload: {
+          email,
+          password,
+        },
+      });
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
