@@ -3,6 +3,9 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "bootstrap/dist/css/bootstrap.css";
+import "primereact/resources/themes/lara-light-blue/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
 import {
   createBrowserRouter,
   Navigate,

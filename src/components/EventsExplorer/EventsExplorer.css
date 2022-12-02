@@ -1,0 +1,35 @@
+.p-inputtext {
+    font-size: 14px;
+    padding: 4px;
+}
+
+.p-datepicker table td {
+    padding: 0;
+}
+
+.p-datepicker table td > span {
+    width: initial;
+    height: initial;
+    font-size: 14px;
+}
+
+.p-datepicker .p-timepicker > div {
+    padding: 0;
+}
+
+.p-datepicker .p-timepicker button {
+    height: initial;
+}
+
+.p-datepicker .p-timepicker span {
+    font-size: 14px;
+}
+
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year, .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
+    padding: 0;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+}
