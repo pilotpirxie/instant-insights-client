@@ -2,10 +2,12 @@ import produce from "immer";
 
 import dayjs from "dayjs";
 import {
+  Login,
   LoginFailure,
-  LoginInit,
+  LoginFromLocalStorage,
   LoginSuccess,
   Logout,
+  RefreshTokens,
   SessionsActionType,
 } from "./actions";
 import ReduxStatuses from "../../utils/reduxStatuses";
@@ -28,7 +30,13 @@ const initialState: Sessions = {
   status: ReduxStatuses.Init,
 };
 
-export type Action = LoginSuccess | LoginInit | LoginFailure | Logout;
+export type Action =
+  | LoginSuccess
+  | Login
+  | LoginFailure
+  | Logout
+  | RefreshTokens
+  | LoginFromLocalStorage;
 
 export default function reducer(
   state: Sessions = initialState,

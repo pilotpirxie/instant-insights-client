@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../utils/reduxHooks";
+import { SessionsActionType } from "../../reducers/sessions/actions";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -7,6 +9,8 @@ export default function Login() {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const sessions = useAppSelector((state) => state.sessions);
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,6 +27,14 @@ export default function Login() {
       }
     }
   };
+
+  useEffect(() => {
+    if (sessions.token) {
+      navigate("/dashboard");
+    } else {
+      dispatch({ type: SessionsActionType.LoginFromLocalStorage });
+    }
+  }, []);
 
   return (
     <div className="container-fluid bg-light h-100 d-flex flex-column justify-content-center align-content-center">
