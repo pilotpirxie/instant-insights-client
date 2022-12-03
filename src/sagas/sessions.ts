@@ -31,6 +31,13 @@ export function* loginFromLocalStorage() {
           refreshToken,
         },
       });
+    } else {
+      yield put({
+        type: SessionsActionType.LoginFailure,
+        payload: {
+          error: "No token in local storage",
+        },
+      });
     }
   } catch (error) {
     if (error instanceof Error) {

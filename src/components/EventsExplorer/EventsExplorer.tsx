@@ -1,6 +1,6 @@
 import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { Calendar } from "primereact/calendar";
 import utc from "dayjs/plugin/utc";
@@ -9,6 +9,7 @@ import { CSVLink } from "react-csv";
 import useMobileSize from "../../utils/useWindowSize";
 import "./EventsExplorer.css";
 import { getAverage, getMax, getMin, getSum } from "../../utils/math";
+import axiosInstance from "../../utils/httpClient";
 
 dayjs.extend(utc);
 
@@ -33,9 +34,6 @@ export type Events = {
 
 const intervals: string[] = ["minute", "hour", "day", "week", "month", "year"];
 
-const getRandomSet = (length: number) =>
-  Array.from({ length }, () => Math.round(Math.random() * 25000));
-
 export default function EventsExplorer({
   name,
   filters,
@@ -52,17 +50,32 @@ export default function EventsExplorer({
   >("day");
   const isMobile = useMobileSize();
 
-  const handleFetch = useCallback(() => {
-    // eslint-disable-next-line no-console
-    console.log("Fetch", dateFrom, dateTo, interval, endpoint);
-  }, [dateFrom, dateTo, interval, endpoint]);
+  const handleFetch = () => {
+    let url = endpoint;
+    if (filters.dateFrom) {
+      url += `?dateFrom=${dayjs(dateFrom).utc().format("YYYY-MM-DDTHH:mm:ss")}`;
+    }
+
+    if (filters.dateTo) {
+      url += `&dateTo=${dayjs(dateTo).utc().format("YYYY-MM-DDTHH:mm:ss")}`;
+    }
+
+    if (filters.interval) {
+      url += `&interval=${interval}`;
+    }
+
+    axiosInstance
+      .get(url)
+      .then((response) => {
+        setEvents(response.data);
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.error(error);
+      });
+  };
 
   useEffect(() => {
-    setEvents({
-      data: getRandomSet(14),
-      labels: getRandomSet(14).map((_, i) => i.toString()),
-    });
-
     handleFetch();
   }, []);
 

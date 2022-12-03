@@ -2,30 +2,25 @@ export type SummaryProps = {
   online: number;
   unique: number;
   events: number;
-  isLive: boolean;
+  // isLive: boolean;
 };
 
-export default function Summary({
-  isLive,
-  unique,
-  online,
-  events,
-}: SummaryProps) {
+export default function Summary({ unique, online, events }: SummaryProps) {
   return (
     <div className="card card-body bg-dark text-light">
       <div className="row">
         <div className="col-12 col-md-4">
           <div>
             <div className="d-flex">
-              {isLive ? (
-                <div className="badge bg-danger me-1 d-flex align-items-center">
-                  <i className="ri-checkbox-blank-circle-fill me-1" /> Live{" "}
-                </div>
-              ) : (
-                <div className="badge bg-secondary me-1 d-flex align-items-center">
-                  <i className="ri-checkbox-blank-circle-fill me-1" /> Offline{" "}
-                </div>
-              )}
+              {/* {isLive ? ( */}
+              {/*  <div className="badge bg-danger me-1 d-flex align-items-center"> */}
+              {/*    <i className="ri-checkbox-blank-circle-fill me-1" /> Live{" "} */}
+              {/*  </div> */}
+              {/* ) : ( */}
+              {/*  <div className="badge bg-secondary me-1 d-flex align-items-center"> */}
+              {/*    <i className="ri-checkbox-blank-circle-fill me-1" /> Offline{" "} */}
+              {/*  </div> */}
+              {/* )} */}
               Online Users
             </div>
             <h2>{online.toLocaleString()}</h2>

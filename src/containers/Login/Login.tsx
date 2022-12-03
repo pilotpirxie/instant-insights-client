@@ -61,44 +61,44 @@ export default function Login() {
             </div>
           )}
 
-          {sessions.status === ReduxStatuses.Failure ||
-            (sessions.status === ReduxStatuses.Init && (
-              <form className="card shadow-sm card-body" onSubmit={handleLogin}>
-                {error && <div className="alert alert-danger">{error}</div>}
-                <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
-                <label htmlFor="email">Email</label>
-                <div className="input-group">
-                  <input
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    id="email"
-                    type="email"
-                    className="form-control"
-                    placeholder="Email"
-                  />
-                </div>
+          {(sessions.status === ReduxStatuses.Failure ||
+            sessions.status === ReduxStatuses.Init) && (
+            <form className="card shadow-sm card-body" onSubmit={handleLogin}>
+              {error && <div className="alert alert-danger">{error}</div>}
+              <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+              <label htmlFor="email">Email</label>
+              <div className="input-group">
+                <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  id="email"
+                  type="email"
+                  className="form-control"
+                  placeholder="Email"
+                />
+              </div>
 
-                <label htmlFor="password" className="mt-2">
-                  Password
-                </label>
-                <div className="input-group">
-                  <input
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    id="password"
-                    type="password"
-                    className="form-control"
-                    placeholder="Password"
-                  />
-                </div>
+              <label htmlFor="password" className="mt-2">
+                Password
+              </label>
+              <div className="input-group">
+                <input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  id="password"
+                  type="password"
+                  className="form-control"
+                  placeholder="Password"
+                />
+              </div>
 
-                <div className="input-group mt-2 d-flex">
-                  <button className="btn btn-primary w-100" type="submit">
-                    Sign In
-                  </button>
-                </div>
-              </form>
-            ))}
+              <div className="input-group mt-2 d-flex">
+                <button className="btn btn-primary w-100" type="submit">
+                  Sign In
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
     </div>

@@ -6,6 +6,9 @@ const axiosInstance = axios.create({
       ? "http://localhost:3000/api"
       : "/api",
   timeout: 3000,
+  headers: {
+    "Cache-Control": "no-cache",
+  },
 });
 
 export default axiosInstance;
