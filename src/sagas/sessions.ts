@@ -99,7 +99,7 @@ export function* refreshTokens(action: RefreshTokens) {
     yield delay(200);
 
     const response: AxiosResponse<LoginResponse> = yield axiosInstance.post(
-      "/refresh-tokens",
+      "/users/refresh-token",
       {
         refreshToken: action.payload.refreshToken,
       }

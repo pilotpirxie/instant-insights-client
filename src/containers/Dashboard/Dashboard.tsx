@@ -1,10 +1,22 @@
 import "./Dashboard.css";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Summary from "../../components/Summary/Summary";
 import EventsExplorer from "../../components/EventsExplorer/EventsExplorer";
 import Footer from "../../components/Footer/Footer";
 import Navigation from "../../components/Navigation/Navigation";
+import { useAppSelector } from "../../utils/reduxHooks";
 
 export default function Dashboard() {
+  const sessions = useAppSelector((state) => state.sessions);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!sessions.token) {
+      navigate("/login");
+    }
+  }, []);
+
   return (
     <div className="container-fluid bg-light d-flex flex-column pt-3">
       <div className="container">

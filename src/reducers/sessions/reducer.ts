@@ -43,6 +43,8 @@ export default function reducer(
   return produce(state, (newState) => {
     switch (action.type) {
       case SessionsActionType.Login:
+      case SessionsActionType.LoginFromLocalStorage:
+      case SessionsActionType.RefreshTokens:
         newState.error = "";
         newState.status = ReduxStatuses.Pending;
         break;
