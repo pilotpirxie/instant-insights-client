@@ -42,6 +42,12 @@ export default function Login() {
     }
   }, []);
 
+  useEffect(() => {
+    if (sessions.token) {
+      navigate("/dashboard");
+    }
+  }, [sessions]);
+
   return (
     <div className="container-fluid bg-light h-100 d-flex flex-column justify-content-center align-content-center">
       <div className="row">

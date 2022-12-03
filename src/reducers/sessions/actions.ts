@@ -30,9 +30,9 @@ export type LoginSuccess = {
   type: SessionsActionType.LoginSuccess;
   payload: {
     token: string;
-    tokenExpiresAt: Date;
+    tokenExpiresAt: number;
     refreshToken: string;
-    refreshTokenExpiresAt: Date;
+    refreshTokenExpiresAt: number;
   };
 };
 

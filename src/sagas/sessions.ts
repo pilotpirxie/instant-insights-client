@@ -2,7 +2,6 @@ import { delay, put } from "redux-saga/effects";
 import { AxiosResponse } from "axios";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
-import { redirect } from "react-router-dom";
 import {
   Login,
   RefreshTokens,
@@ -27,23 +26,11 @@ export function* loginFromLocalStorage() {
       dayjs(Number(refreshTokenExpiresAt)) > dayjs()
     ) {
       yield put({
-        type: SessionsActionType.LoginSuccess,
-        payload: {
-          token,
-          tokenExpiresAt: dayjs(Number(tokenExpiresAt)).toDate(),
-          refreshToken,
-          refreshTokenExpiresAt: dayjs(Number(refreshTokenExpiresAt)).toDate(),
-        },
-      });
-
-      yield put({
         type: SessionsActionType.RefreshTokens,
         payload: {
           refreshToken,
         },
       });
-
-      redirect("/login");
     }
   } catch (error) {
     if (error instanceof Error) {
@@ -69,7 +56,7 @@ export function* login(action: Login) {
     yield delay(200);
 
     const response: AxiosResponse<LoginResponse> = yield axiosInstance.post(
-      "/login",
+      "/users/login",
       {
         email: action.payload.email,
         password: action.payload.password,
@@ -85,13 +72,14 @@ export function* login(action: Login) {
       "refreshTokenExpiresAt",
       refreshTokenExpiresAt.toString()
     );
+
     yield put({
       type: SessionsActionType.LoginSuccess,
       payload: {
         token,
-        tokenExpiresAt: dayjs(tokenExpiresAt).toDate(),
+        tokenExpiresAt,
         refreshToken,
-        refreshTokenExpiresAt: dayjs(refreshTokenExpiresAt).toDate(),
+        refreshTokenExpiresAt,
       },
     });
   } catch (error) {
@@ -145,4 +133,12 @@ export function* refreshTokens(action: RefreshTokens) {
       });
     }
   }
+}
+
+// eslint-disable-next-line require-yield
+export function* logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("tokenExpiresAt");
+  localStorage.removeItem("refreshToken");
+  localStorage.removeItem("refreshTokenExpiresAt");
 }

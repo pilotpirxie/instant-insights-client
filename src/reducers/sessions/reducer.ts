@@ -1,6 +1,4 @@
 import produce from "immer";
-
-import dayjs from "dayjs";
 import {
   Login,
   LoginFailure,
@@ -14,9 +12,9 @@ import ReduxStatuses from "../../utils/reduxStatuses";
 
 export type Sessions = {
   token: string;
-  tokenExpiresAt: Date;
+  tokenExpiresAt: number;
   refreshToken: string;
-  refreshTokenExpiresAt: Date;
+  refreshTokenExpiresAt: number;
   error: string;
   status: ReduxStatuses;
 };
@@ -24,8 +22,8 @@ export type Sessions = {
 const initialState: Sessions = {
   token: "",
   refreshToken: "",
-  refreshTokenExpiresAt: dayjs().toDate(),
-  tokenExpiresAt: dayjs().toDate(),
+  refreshTokenExpiresAt: 0,
+  tokenExpiresAt: 0,
   error: "",
   status: ReduxStatuses.Init,
 };
@@ -58,13 +56,18 @@ export default function reducer(
       case SessionsActionType.LoginFailure:
         newState.error = action.payload.error;
         newState.status = ReduxStatuses.Failure;
+        newState.token = "";
+        newState.tokenExpiresAt = 0;
+        newState.refreshToken = "";
+        newState.refreshTokenExpiresAt = 0;
         break;
       case SessionsActionType.Logout:
         newState.token = "";
-        newState.tokenExpiresAt = dayjs().toDate();
+        newState.tokenExpiresAt = 0;
         newState.refreshToken = "";
-        newState.refreshTokenExpiresAt = dayjs().toDate();
+        newState.refreshTokenExpiresAt = 0;
         newState.status = ReduxStatuses.Init;
+        newState.error = "";
         break;
       default:
         return state;
