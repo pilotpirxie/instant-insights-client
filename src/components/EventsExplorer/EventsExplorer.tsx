@@ -24,6 +24,7 @@ export type EventsExplorerProps = {
     type: boolean;
     pathname: boolean;
     fingerprint: boolean;
+    os: boolean;
   };
 };
 
@@ -33,6 +34,7 @@ export type Events = {
 };
 
 const intervals: string[] = ["minute", "hour", "day", "week", "month", "year"];
+const possibleOs: string[] = ["all", "android", "ios"];
 
 export default function EventsExplorer({
   name,
@@ -48,6 +50,7 @@ export default function EventsExplorer({
   const [interval, setInterval] = useState<
     "minute" | "hour" | "day" | "week" | "month" | "year"
   >("day");
+  const [os, setOs] = useState<"all" | "android" | "ios">("all");
   const isMobile = useMobileSize();
 
   const handleFetch = () => {
@@ -62,6 +65,10 @@ export default function EventsExplorer({
 
     if (filters.interval) {
       url += `&interval=${interval}`;
+    }
+
+    if (filters.os) {
+      url += `&os=${os}`;
     }
 
     axiosInstance
@@ -150,6 +157,21 @@ export default function EventsExplorer({
                   value={interval}
                   options={intervals}
                   onChange={(e) => setInterval(e.target.value)}
+                />
+              </div>
+            )}
+            {filters.os && (
+              <div className="pe-1 d-flex align-items-center">
+                <label
+                  className="small me-1 d-none d-sm-block"
+                  htmlFor="interval"
+                >
+                  OS:
+                </label>
+                <Dropdown
+                  value={os}
+                  options={possibleOs}
+                  onChange={(e) => setOs(e.target.value)}
                 />
               </div>
             )}

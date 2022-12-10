@@ -7,7 +7,7 @@ export default function Footer() {
       <div>Instant Insights Dashboard &copy; {dayjs().format("YYYY")}</div>
       <div>v{packageJson.version}</div>
       <a
-        href="https://github.com/pilotpirxie/instant-insights-client"
+        href="https://github.com/pilotpirxie/instant-insights"
         target="_blank"
         rel="noreferrer"
         className="text-secondary"

@@ -88,6 +88,7 @@ export default function Dashboard() {
                 type: false,
                 pathname: false,
                 fingerprint: false,
+                os: true,
               }}
             />
           </div>
@@ -105,6 +106,7 @@ export default function Dashboard() {
                 type: false,
                 pathname: false,
                 fingerprint: false,
+                os: true,
               }}
             />
           </div>
@@ -122,6 +124,7 @@ export default function Dashboard() {
                 type: false,
                 pathname: false,
                 fingerprint: false,
+                os: true,
               }}
             />
           </div>
