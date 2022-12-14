@@ -72,7 +72,11 @@ export default function EventsExplorer({
     }
 
     axiosInstance
-      .get(url)
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((response) => {
         setEvents(response.data);
       })

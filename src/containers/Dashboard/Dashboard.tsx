@@ -28,7 +28,11 @@ export default function Dashboard() {
 
   const getSummary = async () => {
     axiosInstance
-      .get("/events/summary")
+      .get("/events/summary", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((response) => {
         setSummary(response.data);
       })
